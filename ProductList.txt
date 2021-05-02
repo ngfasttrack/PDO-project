@@ -1,0 +1,20 @@
+1234/Cheese Lovers/Pizza
+6645/Cheese Burger/Pizza
+8545/Pepperoni/Pizza
+6699/Super Supreme/Pizza
+5643/Black Meat Monsta/Pizza
+3425/Veggie Garden/Pizza
+0904/Frankfurter BBQ/Pizza
+7628/Chicken Lovers/Pizza
+8365/Tuna Melt/Pizza
+9235/Regular Splitza/Pizza
+3657/Beef Lasagna/Pasta & Rice
+9254/Cheese beef Fusilli/pasta & Rice
+8753/Black Pepper Chicken Rice/Pasta & Rice
+8712/Cheese Martabak/Appetizer
+1532/Deluxe Chicken bruschetta/Appetizer
+8253/Nacho Cheese/Appetizer
+6534/Lychee Breeze/Drink
+9869/Winter Punch/Drink
+6543/Toffee Coffe/Drink
+7654/Italian Green Soda/Drink
