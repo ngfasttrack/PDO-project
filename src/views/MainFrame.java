@@ -5,18 +5,16 @@ import controllers.CMController;
 import controllers.OMController;
 import controllers.OutletController;
 import controllers.PMController;
+import entities.Customer;
 import entities.Outlet;
 import entities.Product;
 import entities.Shop;
 import models.Order;
-import models.OutletManager;
 import utilities.FileServices;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -44,12 +42,11 @@ public class MainFrame extends JFrame{
     private JComboBox cbAction;
     private JButton addCustomer;
     private JList customerList;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
+    private JTextArea addressArea;
+    private JTextField longField;
+    private JTextField latField;
+    private JTextField phoneField;
+    private JTextField emailField;
     private final PMController pmController;
     private final OMController omController;
     private final OutletController outManController;
@@ -78,14 +75,14 @@ public class MainFrame extends JFrame{
             String id = JOptionPane.showInputDialog(this,"Masukkan id?");
             Product p = pmController.findProductById(id);
             if(p != null){
-                displayDataProduct.append("Result : "+p);
+                displayDataProduct.append("Result : "+p+"\n");
                 sendMessage("Product id "+id+" ditemukan");
+                showDetailProduct(p);
             }
         });
         registerProductButton.addActionListener(e -> {
             RegisterDialog dialog = new RegisterDialog(this);
             dialog.setLocationRelativeTo(this);
-            dialog.pack();
             dialog.setVisible(true);
         });
         doActionButton.addActionListener(e -> {
@@ -116,6 +113,16 @@ public class MainFrame extends JFrame{
             RegisterCustomerDialog dialog = new RegisterCustomerDialog(this);
             dialog.setVisible(true);
         });
+        customerList.addListSelectionListener(e->{
+            Customer customer = (Customer) customerList.getSelectedValue();
+            addressArea.setColumns(5);
+            addressArea.setSize(addressArea.getPreferredSize());
+            addressArea.setText(customer.getLocation().getAddress());
+            longField.setText(""+customer.getLocation().getLongitude());
+            latField.setText(""+customer.getLocation().getLatitude());
+            phoneField.setText(customer.getPhone());
+            emailField.setText(customer.getEmail());
+        });
     }
 
     // End of Constructor
@@ -131,7 +138,6 @@ public class MainFrame extends JFrame{
     public CMController getCmController() {
         return cmController;
     }
-
     public void initial() {
         Outlet centerOutlet = new Outlet();
         centerOutlet.setId("1");
@@ -139,6 +145,7 @@ public class MainFrame extends JFrame{
         getOutManController().getOutletManager().registerOutlet(centerOutlet);
         sendMessage("PDO Apps Ready for Action");
         showOrderTable();
+        showListCustomer();
         //comboAction
         cbAction.setSelectedIndex(1);
         //run clock
@@ -168,7 +175,12 @@ public class MainFrame extends JFrame{
         showOrderTable();
         }
     }
-
+    //Detail Product
+    private void showDetailProduct(Product product){
+        DetailProductDialog dialog = new DetailProductDialog(product);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
     // SAVE
     private void saveDataShop(String filename){
         try {
@@ -234,5 +246,13 @@ public class MainFrame extends JFrame{
             model.addRow(data);
         }
         tableOrders.setModel(model);
+    }
+    //show list Customer
+    public void showListCustomer(){
+        DefaultListModel<Customer> listModel = new DefaultListModel<>();
+        //customerList.setFixedCellWidth(150);
+        customerList.setModel(listModel);
+        for(Customer customer : cmController.getCustomerManager().getCustomerList())
+            listModel.addElement(customer);
     }
 }

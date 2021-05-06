@@ -30,7 +30,7 @@ public class SendOrderDialog extends JDialog {
         this.parent = parent;
         this.order = order;
         setContentPane(contentPane);
-        setSize(600,400);
+        setSize(650,400);
         setLocation(parent.getX()+130,parent.getY()+110);
         setModal(true);
         getRootPane().setDefaultButton(sendButton);
