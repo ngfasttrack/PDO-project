@@ -1,1 +1,2 @@
 # PDO-project
+PDO project merupakan pembelajaran program java menggunakan Studi kasus pada permasalahan yang dihadapi oleh Pizza Store pada layanan PDO (Pizza Delivery Order).  Proses pembelajaran dimulai dari pemahaman problem domain yang disampaikan oleh Pizza Store melalui proses interview.  Selanjutnya dibuat dokumen Project Charter dan seterusnya dilakukan analisa beserta desain dengan menggunakan pemodelan UML.  Implementasi kode program diuraikan dengan jelas menggunakan framework MVC (Model View Controller).
